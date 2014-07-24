@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Bear Angular Front End feature.
+ */
+
+include_once 'bear_angular_front_end.features.inc';

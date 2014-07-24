@@ -1,0 +1,80 @@
+<div style="width:100%">
+    <a class="feature odd" href="#!/home/features/feature1">
+        <div class="wrapper">
+            <div class="name">Lorem Ipsum</div>
+            <img class="img" src="images/element.png" />
+        </div>
+    </a>
+    <a class="feature even" href="#!/home/features/feature2">
+        <div class="wrapper">
+            <div class="name">Lorem Ipsum</div>
+            <img class="img" src="images/element.png" />
+        </div>
+    </a>
+    <a class="feature odd" href="#!/home/features/feature3">
+        <div class="wrapper">
+            <div class="name">Lorem Ipsum</div>
+            <img class="img" src="images/element.png" />
+        </div>
+    </a>
+    <a class="feature even" href="#!/home/features/feature4">
+        <div class="wrapper">
+            <div class="name">Lorem Ipsum</div>
+            <img class="img" src="images/element.png" />
+        </div>
+    </a>
+</div>
+
+<script>
+$('.feature').bind('click', function (e) {
+    e.preventDefault();
+
+    var me = this;
+    var width = $(me).width() / 1.5;
+    $(me).find('.wrapper').width($(me).find('.wrapper').width());
+
+    $(me).animate({
+        opacity: 0,
+        marginLeft: -width
+    }, 500);
+
+    var delayN = 150;
+    var delayP = 150;
+
+    var nextEl = $(me).nextAll('.feature');
+    var prevEl = $(me).prevAll('.feature');
+
+    nextEl.each(function (index, elem) {
+        setTimeout(function () {
+
+            $(elem).find('.wrapper').width($(elem).find('.wrapper').width());
+
+            $(elem).animate({
+                opacity: 0,
+                marginLeft: -width
+              }, 500, function () {
+            });
+        }, delayN);
+        delayN += 100;
+    });
+
+    prevEl.each(function (index, elem) {
+        setTimeout(function () {
+            $(elem).find('.wrapper').width($(elem).find('.wrapper').width());
+
+            $(elem).animate({
+                opacity: 0,
+                marginLeft: -width
+              }, 500, function () {
+            });
+        }, delayP);
+        delayP += 100;
+    });
+
+    setTimeout(function () {
+        document.location = $(me).attr('href');
+    },1000)
+
+    return false;
+});
+</script>

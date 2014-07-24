@@ -1,0 +1,99 @@
+/*********
+ * PAGES *
+ *********/
+
+@import "base";
+
+/*
+ * Body
+ */
+
+body {
+  margin: 0;
+  padding: 0;
+  #skip-link {
+    @include element-invisible;
+  }
+}
+
+/*
+ * Header
+ */
+
+header {
+  background: #FFFFFF;
+  #logo {
+    outline: 0;
+    img {
+      padding: 30px 0 15px 0;
+      width: 180px;
+    }
+  }
+}
+
+/*
+ * Main (container for everything else)
+ */
+
+ #page {
+  position: relative;
+  z-index: 5;
+  clear: both;
+  margin-bottom: $footer-height;
+  #main {
+    #content {
+      .left {
+        float:left;
+      }
+      .right {
+        float:right;
+      }
+      .feature {
+        color:#fff;
+        display:block;
+        .name {
+          float:left;
+          font-size:4em;
+          font-weight:100;
+          position:absolute;
+          width:42%;
+        }
+        .img {
+          float:right;
+          margin-bottom:5%;
+          margin-top:5%;
+          width:30%;
+        }
+        &.odd {
+          background: #F9B634;
+        }
+        &.even {
+          background-image: linear-gradient(rgba(233, 233, 233, 0.2), #eeeeee);
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+        }
+      }
+    }
+  }
+}
+
+/*
+ * Footer
+ */
+
+#footer {
+  clear: both;
+  position: absolute;
+  z-index: 4;
+  bottom: 0;
+  height: $footer-height;
+  width: 100%;
+  .wrapper {
+    text-align: center;
+    .copyright {
+      color:#adadad;
+      text-align:center;
+      width: 100%;
+    }
+  }
+}

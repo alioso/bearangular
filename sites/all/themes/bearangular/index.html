@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zt" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="author" content="Script Tutorials" />
+  <title>Responsive website using AngularJS | Script Tutorials</title>
+  <meta name="description" content="Responsive website using AngularJS - demo page">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+  <!-- add styles -->
+  <link href="css/styles.css" rel="stylesheet" type="text/css" />
+
+  <!-- add javascripts -->
+  <script src="js/jquery-2.0.3.min.js"></script>
+  <script src="js/angular.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/controllers.js"></script>
+</head>
+<body>
+  <div id="page">
+    <header>
+      <div class="wrapper">
+        <!-- logo -->
+        <a href="#!" class="logo-link"><img class="logo" src="images/zt-logo.png" alt="Zivtech" /></a>
+        <div id="navigation">
+          <!-- navigation menu -->
+          <ng-include src="'sections/main-menu.html'"></ng-include>
+        </div>
+      </div>
+    </header>
+
+    <!-- contact us form -->
+    <div id="main">
+      <div class="paddRow contactRow">
+        <div class="wrapper">
+          <div class="head">Contact Us</div>
+          <img class="close" src="images/close.png" ng-click="closeForm()" />
+          <form ng-submit="save()" class="contactForm" name="form" ng-hide="loaded">
+            <input class="input" required="required" type="text" name="name" placeholder="your name" ng-model="message.name" />
+            <input class="input email" required="required" type="email" name="email" value="" placeholder="your email" ng-model="message.email" /><br />
+            <textarea class="textarea" rows="5" required="required" placeholder="your message" ng-model="message.text" ></textarea>
+            <button class="btn green">send message</button>
+          </form>
+
+          <!-- contact us form response messages -->
+          <div ng-show="process" style="text-align:center">
+            <img class="loader" src="images/loader.png" />
+          </div>
+          <div ng-show="success"><p>Your message has been sent, thank you.</p></div>
+        </div>
+      </div>
+
+      <!-- main content -->
+      <div id="content" style="position:relative">
+        <div style="width:100%" ng-view ng-animate="{enter: 'view-enter', leave: 'view-leave'}"></div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <div id="footer">
+    <ng-include src="'sections/footer.html'"></ng-include>
+  </div>
+</body>
+</html>

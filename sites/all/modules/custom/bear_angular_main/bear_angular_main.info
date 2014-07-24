@@ -1,0 +1,12 @@
+name = Bear Angular Main
+description = Module dependencies and content types
+core = 7.x
+package = Bear Angular
+dependencies[] = ctools
+dependencies[] = features
+dependencies[] = libraries
+dependencies[] = navbar
+dependencies[] = strongarm
+dependencies[] = views
+dependencies[] = views_ui
+features[features_api][] = api:2

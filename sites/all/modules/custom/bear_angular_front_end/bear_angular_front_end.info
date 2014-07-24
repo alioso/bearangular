@@ -1,0 +1,11 @@
+name = Bear Angular Front End
+description = Theme settings and theme related variables
+core = 7.x
+package = Bear Angular
+dependencies[] = ctools
+dependencies[] = strongarm
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:2
+features[variable][] = admin_theme
+features[variable][] = theme_default
+features[variable][] = theme_settings
