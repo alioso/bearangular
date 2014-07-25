@@ -99,7 +99,7 @@ function bear_angular_main_views_default_views() {
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'views_json';
   $handler->display->display_options['style_options']['root_object'] = 'taxonomy';
-  $handler->display->display_options['style_options']['top_child_object'] = 'article';
+  $handler->display->display_options['style_options']['top_child_object'] = 'term';
   $handler->display->display_options['style_options']['plaintext_output'] = 1;
   $handler->display->display_options['style_options']['remove_newlines'] = 0;
   $handler->display->display_options['style_options']['jsonp_prefix'] = '';
