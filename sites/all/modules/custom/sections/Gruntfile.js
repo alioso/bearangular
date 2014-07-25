@@ -6,14 +6,18 @@ module.exports = function (grunt) {
     pkg: grunt.file.readJSON('package.json'),
     watch: {
       scripts: {
-        files: ['./js/**/*.js', '!./js/sections.gen.js'],
-        tasks: ['jshint', 'concat:sections']
+        files: ['./js/**/*.js', '!./js/sections.gen.js', '!./js/articles.gen.js'],
+        tasks: ['jshint', 'concat:sections', 'concat:articles']
       }
     },
     concat: {
       sections: {
-        src: ['./js/sections/**/*.js', './js/sections/sections.gen.js'],
+        src: ['./js/sections/**/*.js', '!./js/sections/sections.gen.js'],
         dest: './js/sections.gen.js'
+      },
+      articles: {
+        src: ['./js/articles/**/*.js', '!./js/articles/articles.gen.js'],
+        dest: './js/articles.gen.js'
       }
     },
     jshint: {
