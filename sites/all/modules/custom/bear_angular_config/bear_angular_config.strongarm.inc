@@ -29,13 +29,7 @@ function bear_angular_config_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'angularjs_files';
   $strongarm->value = array(
-    0 => 'angular-bootstrap-prettify',
-    1 => 'angular-bootstrap',
-    2 => 'angular-cookies',
-    3 => 'angular-loader',
-    4 => 'angular-mocks',
-    5 => 'angular-resource',
-    6 => 'angular-sanitize',
+    0 => 'angular-sanitize',
   );
   $export['angularjs_files'] = $strongarm;
 
@@ -43,7 +37,7 @@ function bear_angular_config_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'angularjs_version';
-  $strongarm->value = '1.0.8';
+  $strongarm->value = '1.2.0-rc.3';
   $export['angularjs_version'] = $strongarm;
 
   return $export;
