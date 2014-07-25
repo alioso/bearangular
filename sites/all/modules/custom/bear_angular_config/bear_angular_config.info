@@ -1,0 +1,12 @@
+name = Bear Angular Config
+description = Everything related to the Angular config
+core = 7.x
+package = Bear Angular
+dependencies[] = ctools
+dependencies[] = strongarm
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:2
+features[variable][] = angularjs_cdn
+features[variable][] = angularjs_compression_type
+features[variable][] = angularjs_files
+features[variable][] = angularjs_version

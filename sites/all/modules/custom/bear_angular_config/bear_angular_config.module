@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Bear Angular Config feature.
+ */
+
+include_once 'bear_angular_config.features.inc';
