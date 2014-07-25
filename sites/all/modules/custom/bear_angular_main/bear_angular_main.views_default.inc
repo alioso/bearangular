@@ -77,7 +77,7 @@ function bear_angular_main_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'sections';
+  $handler->display->display_options['path'] = 'json/sections';
   $export['sections'] = $view;
 
   return $export;
