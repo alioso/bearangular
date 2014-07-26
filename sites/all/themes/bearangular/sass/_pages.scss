@@ -94,6 +94,21 @@ header {
   }
 }
 
+/* Our Angular Layout */
+
+.page-sections {
+  #main {
+    .wrapper {
+      max-width: 100%;
+      .section {
+        .wrapper {
+          max-width: $max-width;
+        }
+      }
+    }
+  }
+}
+
 /*
  * Footer
  */
