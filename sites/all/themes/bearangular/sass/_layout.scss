@@ -14,11 +14,4 @@
   padding:0 50px;
   position:relative;
   width:100%;
-  &:before {
-    content:'';
-    display:inline-block;
-    height:100%;
-    margin-right:-0.25em;
-    vertical-align:middle;
-  }
 }

@@ -13,13 +13,13 @@ sectionsApp.config(['$routeProvider',
       templateUrl: '/sites/all/modules/custom/sections/templates/sections.html',
       controller: 'sectionsCtrl'
     })
-    .when('/sections/:tid', {
+    .when('/section/:tid', {
       templateUrl: '/sites/all/modules/custom/sections/templates/articles.html',
-      controller: 'articleCtrl'
+      controller: 'articlesCtrl'
     })
     .otherwise({
       redirectTo: '/'
-  });
+    });
 }]);
 
 jQuery(document).ready(function() {

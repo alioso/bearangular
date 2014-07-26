@@ -9,11 +9,6 @@ function sections_menu() {
     'page callback' => 'all_sections_page',
     'access arguments' => array('access content'),
     );
-  $items ['articles'] = array(
-    'title' => 'All articles',
-    'page callback' => 'all_articles_page',
-    'access arguments' => array('access content'),
-    );
 
   return $items;
 };
@@ -23,13 +18,10 @@ function sections_menu() {
 */
 function sections_theme() {
   return array(
-      'all_sections' => array(
-        'template' => 'all-sections',
-        ),
-      'all_articles' => array(
-        'template' => 'all-articles',
+    'all_sections' => array(
+      'template' => 'all-sections',
       ),
-    );
+  );
 }
 
 /**
@@ -43,17 +35,4 @@ function all_sections_page() {
   drupal_add_js($path . '/js/sections.gen.js');
 
   return theme('all_sections');
-}
-
-/**
-* All articles callback
-*/
-function all_articles_page() {
-
-  drupal_add_library('angularjs', 'angularjs');
-  drupal_add_library('angularjs', 'angularjs');
-  $path = drupal_get_path('module', 'sections');
-  drupal_add_js($path . '/js/sections.gen.js');
-
-  return theme('all_articles');
 }
