@@ -53,7 +53,7 @@ function all_articles_page() {
   drupal_add_library('angularjs', 'angularjs');
   drupal_add_library('angularjs', 'angularjs');
   $path = drupal_get_path('module', 'sections');
-  drupal_add_js($path . '/js/articles.gen.js');
+  drupal_add_js($path . '/js/sections.gen.js');
 
   return theme('all_articles');
 }

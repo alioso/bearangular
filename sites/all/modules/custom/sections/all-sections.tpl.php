@@ -1,10 +1,3 @@
-<div id="sections-app" ng-controller="sectionscontroller">
-  <div class="section" ng-repeat="section in sections">
-    <a href="/#/section/mixins/articles">
-      <div class="wrapper">popo
-        <h2>{{section.term.name}}</h2>
-        <div class="description">{{section.term.description}}</div>
-      </div>
-    </a>
-  </div>
+<div id="sections-app">
+  <div ng-view ng-animate="{enter: 'view-enter', leave: 'view-leave'}"></div>
 </div>
