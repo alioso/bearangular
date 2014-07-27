@@ -29,8 +29,9 @@ function bear_angular_config_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'angularjs_files';
   $strongarm->value = array(
-    0 => 'angular-route',
-    1 => 'angular-sanitize',
+    0 => 'angular-animate',
+    1 => 'angular-route',
+    2 => 'angular-sanitize',
   );
   $export['angularjs_files'] = $strongarm;
 
