@@ -3,6 +3,7 @@
 var sectionsApp = angular.module('sectionsApp', [
   'ngRoute',
   'ngSanitize',
+  'ngAnimate',
   'sectionsControllers'
 ]);
 

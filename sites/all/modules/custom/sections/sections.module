@@ -5,7 +5,6 @@
 */
 function sections_menu() {
   $items ['sections'] = array(
-    'title' => 'All sections',
     'page callback' => 'all_sections_page',
     'access arguments' => array('access content'),
     );

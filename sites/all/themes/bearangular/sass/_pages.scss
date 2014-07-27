@@ -39,11 +39,14 @@ header {
   position: relative;
   z-index: 5;
   clear: both;
-  margin-bottom: $footer-height;
+  //margin-bottom: $footer-height;
   #main {
     #content {
       .ng-container {
         width: 100%;
+        h1 {
+          background: #fff;
+        }
         h2 {
           margin: 0;
           padding: 0;
@@ -56,6 +59,16 @@ header {
             width: 100%;
             float: left;
             padding: 40px 0;
+            color: #fff;
+            text-decoration: none;
+            &.odd {
+              background: #F9B634;
+            }
+            &:hover {
+              color: #fff;
+              background: #424242;
+              text-decoration: none;
+            }
           }
         }
       }
@@ -100,12 +113,58 @@ header {
   #main {
     .wrapper {
       max-width: 100%;
-      .section {
+      .section, .article {
         .wrapper {
           max-width: $max-width;
         }
       }
     }
+  }
+}
+.anim {
+  &.ng-enter,
+  &.ng-leave,
+  &.ng-move {
+  -webkit-transition: 0.5s linear all;
+  -moz-transition: 0.5s linear all;
+  -o-transition: 0.5s linear all;
+  transition: 0.5s linear all;
+  position:relative;
+  }
+}
+.anim {
+  &.ng-enter {
+    left:20px;
+    opacity:0;
+    &.ng-enter-active {
+      left:0;
+      opacity:1;
+    }
+  }
+  &.ng-leave {
+    left: 0px;
+    opacity: .1;
+    &.ng-leave-active {
+      left: 0;
+      opacity: 0;
+    }
+  }
+  &.ng-move {
+    opacity:.5;
+    &.ng-leave-active {
+      opacity:1;
+    }
+  }
+}
+
+.view-leave {
+  left:0;
+  opacity:1;
+  position:absolute;
+  top:0;
+  &.view-leave-active {
+    left:-20px;
+    opacity:0;
   }
 }
 
@@ -115,10 +174,10 @@ header {
 
 #footer {
   clear: both;
-  position: absolute;
+  //position: absolute;
   z-index: 4;
   bottom: 0;
-  height: $footer-height;
+  //height: $footer-height;
   width: 100%;
   .wrapper {
     text-align: center;
