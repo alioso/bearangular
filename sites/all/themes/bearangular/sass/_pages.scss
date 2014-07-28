@@ -8,9 +8,10 @@
  * Body
  */
 
-body {
+body, html {
   margin: 0;
   padding: 0;
+  background: #f5f5f5;
   #skip-link {
     @include element-invisible;
   }
@@ -64,10 +65,19 @@ header {
             &.odd {
               background: #F9B634;
             }
-            &:hover {
-              color: #fff;
+            &.even {
+              background: #ddd;
+              h2 {
+                color: #999;
+              }
+            }
+            &:hover, &:hover h2, &:focus {
+              color: #fff !important;
               background: #424242;
               text-decoration: none;
+            }
+            &:hover .description {
+              color: #ccc;
             }
           }
         }
@@ -98,9 +108,8 @@ header {
           background: #F9B634;
         }
         &.even {
-          background-image: linear-gradient(rgba(233, 233, 233, 0.2), #eeeeee);
-    border-bottom: 1px solid #ddd;
-    border-top: 1px solid #ddd;
+          background: #eee;
+          border-bottom: 1px solid #ccc;
         }
       }
     }
@@ -154,17 +163,6 @@ header {
     &.ng-leave-active {
       opacity:1;
     }
-  }
-}
-
-.view-leave {
-  left:0;
-  opacity:1;
-  position:absolute;
-  top:0;
-  &.view-leave-active {
-    left:-20px;
-    opacity:0;
   }
 }
 

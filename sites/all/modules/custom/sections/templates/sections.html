@@ -1,7 +1,10 @@
 <div class="section">
   <!-- <h1 class="wrapper">Sections</h1> -->
-  <div ng-repeat="section in sections">
-    <a href="#/section/{{section.term.tid}}" class="section-link" ng-class-odd="'odd'" ng-class-even="'even'">
+  <div class="wrapper">
+    <div class="search-card"><input ng-model="query" placeholder="Quick Search"></div>
+  </div>
+  <div data-ng-repeat="section in sections | filter:query | orderBy:orderTerms" ng-enter="myFunction()" >
+    <a href="#/section/{{section.term.tid}}" class="section-link" ng-class-odd="'odd'" ng-class-even="'even'" focusable>
       <div class="wrapper">
         <h2>{{section.term.name}}</h2>
         <div class="description">{{section.term.description}}</div>

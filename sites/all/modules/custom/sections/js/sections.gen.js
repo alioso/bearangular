@@ -4,6 +4,7 @@ var sectionsApp = angular.module('sectionsApp', [
   'ngRoute',
   'ngSanitize',
   'ngAnimate',
+  'sectionsDirectives',
   'sectionsControllers'
 ]);
 
@@ -47,17 +48,21 @@ sectionsControllers
   $http.get('/json/sections').success(function(result) {
     $scope.sections = (function () {
       return result.taxonomy;
+      //$scope.orderTerms = 'title';
     })();
   });
 }])
 .controller('articlesCtrl', ['$scope', '$routeParams', '$http', '$sce',
   function($scope, $routeParams, $http, $sce) {
-  $http.get('/json/' + $routeParams.tid + '/articles').success(function(result) {
-    $scope.renderHtml = function (htmlCode) {
-      return $sce.trustAsHtml(htmlCode);
-    };
-    $scope.articles = (function () {
-      return result.node;
-    })();
+  $http.get('/json/' + $routeParams.tid + '/articles')
+    .success(function(result) {
+      $scope.renderHtml = function (htmlCode) {
+        return $sce.trustAsHtml(htmlCode);
+      };
+      $scope.articles = (function () {
+        return result.node;
+      })();
   });
 }]);
+
+var sectionsDirectives = angular.module('sectionsDirectives', []);
