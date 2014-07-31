@@ -41,14 +41,13 @@ sectionsControllers
     $scope.isActive = function (viewLocation) {
      var active = (viewLocation === $location.path());
      return active;
-  };
+    };
 }])
-.controller('sectionsCtrl', ['$scope', '$http',
-  function($scope, $http) {
+.controller('sectionsCtrl', ['$scope', '$http', '$location',
+  function($scope, $http, $location) {
   $http.get('/json/sections').success(function(result) {
     $scope.sections = (function () {
       return result.taxonomy;
-      //$scope.orderTerms = 'title';
     })();
   });
 }])
@@ -66,3 +65,14 @@ sectionsControllers
 }]);
 
 var sectionsDirectives = angular.module('sectionsDirectives', []);
+
+sectionsDirectives.directive('keyNav', function() {
+    return {
+        // Restrict it to be an attribute in this case
+        restrict: 'A',
+        // responsible for registering DOM listeners as well as updating the DOM
+        link: function(scope, element, attrs) {
+            angular.element(element).keynav();
+        }
+    };
+});

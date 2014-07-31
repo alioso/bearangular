@@ -3,12 +3,14 @@
   <div class="wrapper">
     <div class="search-card"><input ng-model="query" placeholder="Quick Search"></div>
   </div>
-  <div data-ng-repeat="section in sections | filter:query | orderBy:orderTerms" ng-enter="myFunction()" >
-    <a href="#/section/{{section.term.tid}}" class="section-link" ng-class-odd="'odd'" ng-class-even="'even'" focusable>
-      <div class="wrapper">
-        <h2>{{section.term.name}}</h2>
-        <div class="description">{{section.term.description}}</div>
-      </div>
-    </a>
-  </div>
+  <ul>
+    <li data-ng-repeat="section in sections | filter:query | orderBy:orderTerms" ng-class-odd="'odd'" ng-class-even="'even'">
+      <a href="#/section/{{section.tid}}" class="section-link" key-nav>
+        <div class="wrapper">
+          <h2>{{section.name}}</h2>
+          <div class="description">{{section.description}}</div>
+        </div>
+      </a>
+    </li>
+  </ul>
 </div>
