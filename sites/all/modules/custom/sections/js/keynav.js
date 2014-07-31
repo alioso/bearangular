@@ -44,8 +44,8 @@
         e.preventDefault();
       }
       if(e.which === 37){
-        history.go(-1);
-        e.preventDefault();
+        //$('#logo').click();
+        document.location = '/#/';
       }
     });
 
