@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Implementation of hook_requirements().
+ * Based on code from "3 Tips For Using External Libraries With Drupal":
+ * http://engineeredweb.com/blog/10/5/3-tips-using-external-libraries-drupal
+ */
+function zeroclipboard_requirements($phase) {
+  $requirements = array();
+  // Ensure translations do not break at install time
+  $t = get_t();
+
+  $requirements['zeroclipboard'] = array(
+    'title' => $t('Zero-Clipboard JS Library'),
+  );
+
+  if (function_exists('libraries_get_libraries')) {
+    $libraries = libraries_get_libraries();
+    if (isset($libraries['zeroclipboard'])) {
+      $requirements['zeroclipboard']['value'] = $t('Installed');
+      $requirements['zeroclipboard']['severity'] = REQUIREMENT_OK;
+    }
+    else {
+      if ($phase=='runtime') {
+        $requirements['zeroclipboard']['value'] = $t('Not Installed');
+      }
+      $requirements['zeroclipboard']['severity'] = REQUIREMENT_ERROR;
+      $requirements['zeroclipboard']['description'] = $t('The Zero Clipboard library was not installed. Please download the Zero Clipboard library (%url) before installing the Zero Clipboard module or use the \'drush zeroclipboard-plugin\' command. See the README.txt file for more information.', array('%url' => 'http://code.google.com/p/zeroclipboard/downloads/list'));
+    }
+  }
+
+  return $requirements;
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function zeroclipboard_uninstall() {
+  variable_del('zeroclipboard_selectors');
+}

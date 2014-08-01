@@ -6,13 +6,13 @@ module.exports = function (grunt) {
     pkg: grunt.file.readJSON('package.json'),
     watch: {
       scripts: {
-        files: ['./js/**/*.js', '!./js/sections.gen.js'],
+        files: ['./js/**/*.js', '!./js/sections.gen.js', '!js/keynav.js', '!js/angular-highlightjs.min.js'],
         tasks: ['jshint', 'concat:sections']
       }
     },
     concat: {
       sections: {
-        src: ['./js/sections/**/*.js', '!./js/sections/sections.gen.js'],
+        src: ['./js/sections/**/*.js', '!./js/sections/sections.gen.js', '!./js/sections/keynav.js', '!./js/sections/angular-highlightjs.min.js'],
         dest: './js/sections.gen.js'
       },
     },
@@ -22,7 +22,9 @@ module.exports = function (grunt) {
       },
       all: [
         'js/**/*.js',
-        '!js/**/*.gen.js'
+        '!js/keynav.js',
+        '!js/**/*.gen.js',
+        '!js/angular-highlightjs.min.js'
       ]
     },
   });

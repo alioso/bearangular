@@ -161,16 +161,30 @@ a.button {
   }
 }
 
-input,textarea {
-  -webkit-appearance:none;
-  background-color:#f7f7f7;
-  border:none;
-  border-radius:3px;
-  font-size:1em;
-  font-weight:100;
-}
-input:focus,textarea:focus {
-  border:none;
-  outline:2px solid #7ed7b9;
+.search-section {
+  background: #424242;
+  input.text {
+    -webkit-appearance: none;
+    background: #424242;
+    border: none;
+    font-size: 1em;
+    font-weight: 100;
+    padding: 20px 0;
+    height: 60px;
+    width: 100%;
+    color: #fff;
+    font-style: italic;
+    @include box-sizing(border-box);
+    @include bearfont-titles;
+  }
+  input.focused {
+    border: none;
+    background: #ddd;
+    color: #000;
+    font-style: italic;
+  }
+  &.focused {
+    background: #ddd;
+  }
 }
 

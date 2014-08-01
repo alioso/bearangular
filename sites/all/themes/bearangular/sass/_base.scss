@@ -198,6 +198,19 @@ OUR CUSTOM MIXINS
   to {opacity: 1;}
 }
 
+@keyframes slide {
+  100% {left: 20px;}
+}
+@-moz-keyframes slide { /* Firefox */
+  100% {left: 20px;}
+}
+@-webkit-keyframes slide { /* Safari and Chrome */
+  100% {left: 20px;}
+}
+@-o-keyframes slide { /* Opera */
+  100% {left: 20px;}
+}
+
 .loader {
   -moz-animation:loader_rot 1.3s linear infinite;
   -o-animation:loader_rot 1.3s linear infinite;

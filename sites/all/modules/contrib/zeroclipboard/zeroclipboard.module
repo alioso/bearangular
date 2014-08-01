@@ -1,0 +1,110 @@
+<?php
+
+/**
+ * @file
+ *
+ * This module provides an integration with the ZeroClipboard JS/Flash library
+ * to allow copying text to clipboard with a button.
+ */
+
+/**
+ * Implementation of hook_init().
+ */
+function zeroclipboard_init() {
+  // Including the JS of the library itself
+  drupal_add_js(libraries_get_path('zeroclipboard') . '/ZeroClipboard.js');
+
+  // Including our JS file
+  drupal_add_js(drupal_get_path('module', 'zeroclipboard') . '/zeroclipboard.js');
+
+  // Misc Settings
+  $settings['zeroClipboard']['moviePath'] = libraries_get_path('zeroclipboard') . '/ZeroClipboard.swf';
+
+  // Get selectors of elements specified in the settings page (which is also @TODO!)
+  $selectors_from_settings = variable_get('zeroclipboard_selectors', array());
+  $settings['zeroClipboard']['selectorsToProcess'] = $selectors_from_settings;
+
+  // @TODO: Make it possible for other modules to hook in, and declare elements to be processed with ZeroClipboard
+
+  drupal_add_js($settings, 'setting');
+}
+
+/**
+ * Implementation of hook_menu().
+ */
+function zeroclipboard_menu() {
+  $items = array();
+
+  $items['admin/settings/zeroclipboard'] = array(
+    'title'            => 'Zero Clipboard',
+    'page callback'    => 'drupal_get_form',
+    'page arguments'   => array('zeroclipboard_settings_form'),
+    'access arguments' => array('administer zeroclipboard'),
+  );
+
+  return $items;
+}
+
+/**
+ * The settings form builder, used in admin/settings/zeroclipboard.
+ */
+function zeroclipboard_settings_form() {
+  $form = array();
+
+  $form['selectors'] = array(
+    '#type'          => 'textarea',
+    '#title'         => t('Selectors To Process'),
+    '#rows'          => 5,
+    '#description'   => t('Use the notation [element_selector]|[value_to_copy_to_clipboard]. Add each selector on a separate line.'),
+    '#default_value' => _zeroclipboard_array_to_text(variable_get('zeroclipboard_selectors', array())),
+  );
+
+  $form['save'] = array(
+    '#type'          => 'submit',
+    '#value'         => t('Save'),
+    '#submit'        => array('zeroclipboard_settings_form_save_submit'),
+  );
+
+  return $form;
+}
+
+/**
+ * The submit handler for the settings form.
+ */
+function zeroclipboard_settings_form_save_submit($form, &$form_state) {
+  $selectors_to_save = _zeroclipboard_text_to_array($form_state['values']['selectors']);
+
+  variable_set('zeroclipboard_selectors', $selectors_to_save);
+
+  drupal_set_message(t('Zero Clipboard settings have been saved.'));
+}
+
+/**
+ * Helper function to convert the selectors text in the settings form to a structured array
+ */
+function _zeroclipboard_text_to_array($text) {
+  $new_selectors_values = explode("\n", str_replace("\r", '', $text));
+
+  $selectors = array();
+  foreach ($new_selectors_values as $new_selectors_value) {
+    $data_pair = explode('|', $new_selectors_value);
+    if ($data_pair[0] && $data_pair[1]) {
+      $selectors[] = array('selector' => $data_pair[0], 'value' => $data_pair[1]);
+    }
+  }
+
+  return $selectors;
+}
+
+/**
+ * Helper function to convert the structured array of selectors to text to use as a default value in the settings form.
+ */
+function _zeroclipboard_array_to_text($structured_selectors = array()) {
+  $text = '';
+
+  foreach ($structured_selectors as $structured_selector) {
+    $text .= $structured_selector['selector'] . '|' . $structured_selector['value'] . "\r\n";
+  }
+
+  return $text;
+}

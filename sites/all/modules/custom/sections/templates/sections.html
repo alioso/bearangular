@@ -1,7 +1,9 @@
 <div class="section">
   <!-- <h1 class="wrapper">Sections</h1> -->
-  <div class="wrapper">
-    <div class="search-card"><input ng-model="query" placeholder="Quick Search"></div>
+  <div class="search-section">
+    <div class="wrapper">
+      <input ng-model="query" placeholder="Quick Search ..[tab].." class="text">
+    </div>
   </div>
   <ul>
     <li data-ng-repeat="section in sections | filter:query | orderBy:orderTerms" ng-class-odd="'odd'" ng-class-even="'even'">

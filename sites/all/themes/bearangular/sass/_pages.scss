@@ -12,8 +12,12 @@ body, html {
   margin: 0;
   padding: 0;
   background: #f5f5f5;
+  font-size: 14px;
   #skip-link {
     @include element-invisible;
+  }
+  p {
+    font-size: 14px;
   }
 }
 
@@ -66,30 +70,52 @@ header {
             list-style-type: none;
             margin: 0;
             padding: 40px 0;
+            position: relative;
             .section-link {
               width: 100%;
               color: #fff;
               text-decoration: none;
             }
             &.odd {
-              background: #F9B634;
+              background: #f5f5f5;
+               h2 {
+                color: #999;
+              }
             }
             &.even {
-              background: #ddd;
+              background: #eee;
               h2 {
                 color: #999;
               }
             }
             &:hover, &.selected {
               color: #fff !important;
-              background: #424242;
+              background: #F9B634;
               text-decoration: none;
-              h2 {
-                color: #fff;
+              .wrapper {
+                &:after {
+                  content: "▶";
+                  color: #fff;
+                  font-size: 14px;
+                  position: absolute;
+                  left: 0px;
+                  top: 13px;
+                }
+                h2 {
+                  color: #fff;
+                  -webkit-animation: slide 0.5s forwards;
+                  -moz-animation: slide 0.5s forwards;
+                  animation: slide 0.5s forwards;
+                  left: 0;
+                  position: relative;
+                }
+                .description {
+                  color: #333;
+                }
               }
-              .description {
-                color: #ccc;
-              }
+            }
+            &.selected {
+              cursor: none;
             }
           }
         }

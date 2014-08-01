@@ -8,6 +8,7 @@ base theme  = zen
 
 ; Our stylesheet(s)
 stylesheets[all][] = css/styles.css
+stylesheets[all][] = css/prism.css
 
 ; If you still wish to use conditional stylesheets, you must install the
 ; conditional stylesheets module: http://drupal.org/project/conditional_styles
@@ -15,6 +16,7 @@ stylesheets[all][] = css/styles.css
 
 ; Our script(s)
 
+scripts[] = js/prism.js
 scripts[] = js/script.js
 
 ; Our regions

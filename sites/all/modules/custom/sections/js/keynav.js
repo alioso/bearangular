@@ -49,7 +49,17 @@
       }
     });
 
+    /* Unrelated to keynav, but more of a theming improv on the search input */
+    $( "#content" ).delegate( "input.text", "focus blur", function() {
+      var elem = $( this );
+      setTimeout(function() {
+        elem.toggleClass( "focused", elem.is( ":focus" ) );
+        $('.search-section').toggleClass( "focused", elem.is( ":focus" ) );
+      }, 0 );
+    });
+
     return this;
+
   }
 
 })(jQuery, window, document);
