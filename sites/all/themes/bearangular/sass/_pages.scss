@@ -69,26 +69,27 @@ header {
             float: left;
             list-style-type: none;
             margin: 0;
-            padding: 40px 0;
             position: relative;
             .section-link {
               width: 100%;
               color: #fff;
               text-decoration: none;
+              padding: 40px 0;
+              display: block;
             }
-            &.odd {
+            &.odd a {
               background: #f5f5f5;
                h2 {
                 color: #999;
               }
             }
-            &.even {
+            &.even a {
               background: #eee;
               h2 {
                 color: #999;
               }
             }
-            &:hover, &.selected {
+            a:hover, &.selected a {
               color: #fff !important;
               background: #F9B634;
               text-decoration: none;
@@ -113,9 +114,6 @@ header {
                   color: #333;
                 }
               }
-            }
-            &.selected {
-              cursor: none;
             }
           }
         }

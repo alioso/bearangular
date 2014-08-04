@@ -77,14 +77,24 @@ sectionsDirectives.directive('keyNav', function() {
       };
 });
 
-sectionsDirectives.directive('repeatDone', function ($parse) {
-   return {
-     restrict: 'A',
-     link: function (scope, element, attrs) {
-       if (scope.$last) {
-         var fn = $parse(attrs.repeatDone);
-         fn(scope);
-       }
-     }
-   };
- });
+sectionsDirectives.directive('prism', ['$compile', function($compile) {
+    return function(scope, elem, attrs) {
+
+        scope.$watch('article.article.body', function (value) {
+            Prism.highlightAll();
+        });
+
+        //create an angular element. (this is still our "view")
+        var el = angular.element(html),
+
+        //compile the view into a function.
+        compiled = $compile(el);
+
+        //append our view to the element of the directive.
+        elem.append(el);
+
+        //bind our view to the scope!
+        //(try commenting out this line to see what happens!)
+        compiled(scope);
+    };
+}]);

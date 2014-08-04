@@ -31,10 +31,5 @@ sectionsControllers
       $scope.articles = (function () {
         return result.node;
       })();
-      $scope.layoutDone = function(){
-       $timeout(function(){
-         Prism.highlightAll();
-       }, 0);
-     };
   });
 }]);

@@ -20,7 +20,9 @@
         else{
           liSelected = li.eq(0).addClass('selected');
         }
+        //li.css('pointer-events', 'none');
         e.preventDefault();
+        $('li a').css('pointer-events', 'none');
       }
       else if(e.which === 38){
         if(liSelected){
@@ -37,6 +39,7 @@
           liSelected = li.last().addClass('selected');
         }
         e.preventDefault();
+        $('li a').css('pointer-events', 'none');
       }
       var lia = $('li.selected a');
       if(e.which === 39){
@@ -44,9 +47,12 @@
         e.preventDefault();
       }
       if(e.which === 37){
-        //$('#logo').click();
         document.location = '/#/';
       }
+      $('body').mousemove(function() {
+        $('li').removeClass('selected');
+        $('li a').css('pointer-events', 'auto');
+      });
     });
 
     /* Unrelated to keynav, but more of a theming improv on the search input */
