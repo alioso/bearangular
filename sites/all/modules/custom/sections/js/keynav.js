@@ -2,7 +2,7 @@
 
   $.fn.keynav = function() {
 
-    var li = $('li');
+    var li = $('.section li, .article li');
     var liSelected;
 
     $(window).keydown(function(e){
@@ -39,9 +39,31 @@
           liSelected = li.last().addClass('selected');
         }
         e.preventDefault();
-        $('li a').css('pointer-events', 'none');
+        $('.section li a').css('pointer-events', 'none');
       }
-      var lia = $('li.selected a');
+
+      function SelectText(element) {
+        var doc = document;
+        var text = doc.getElementById(element);
+        if (doc.body.createTextRange) { // ms
+          var range = doc.body.createTextRange();
+          range.moveToElementText(text);
+          range.select();
+        } else if (window.getSelection) {
+          var selection = window.getSelection();
+          var range = doc.createRange();
+          range.selectNodeContents(text);
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
+      }
+
+      if(e.which === 67){
+        $('.article li.selected code').attr('id','code');
+        SelectText('code');
+        e.preventDefault();
+      }
+      var lia = $('.section li.selected a');
       if(e.which === 39){
         lia.click();
         e.preventDefault();
@@ -50,8 +72,8 @@
         document.location = '/#/';
       }
       $('body').mousemove(function() {
-        $('li').removeClass('selected');
-        $('li a').css('pointer-events', 'auto');
+        $('.section li').removeClass('selected');
+        $('.section li a').css('pointer-events', 'auto');
       });
     });
 

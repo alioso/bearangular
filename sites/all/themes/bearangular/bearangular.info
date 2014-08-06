@@ -17,6 +17,7 @@ stylesheets[all][] = css/prism.css
 ; Our script(s)
 
 scripts[] = js/prism.js
+scripts[] = js/jquery.highlightText.min.js
 scripts[] = js/script.js
 
 ; Our regions

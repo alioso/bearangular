@@ -13,13 +13,11 @@ sectionsDirectives.directive('keyNav', function() {
 
 sectionsDirectives.directive('prism', ['$compile', function($compile) {
     return function(scope, elem, attrs) {
-
         scope.$watch('article.article.body', function (value) {
             Prism.highlightAll();
         });
-
         //create an angular element. (this is still our "view")
-        var el = angular.element(html),
+        var el = angular.element(),
 
         //compile the view into a function.
         compiled = $compile(el);
@@ -27,8 +25,7 @@ sectionsDirectives.directive('prism', ['$compile', function($compile) {
         //append our view to the element of the directive.
         elem.append(el);
 
-        //bind our view to the scope!
-        //(try commenting out this line to see what happens!)
+        //bind our view to the scope
         compiled(scope);
     };
 }]);

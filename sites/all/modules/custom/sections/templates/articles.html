@@ -1,10 +1,17 @@
 <div class="article">
-  <div class="wrapper">
-    <!-- <h1>Articles</h1> -->
-
-      <div class="articles" ng-repeat="article in articles" key-nav prism>
-      <h2>{{article.article.title}}</h2>
-      <div class="description" ng-bind-html="renderHtml(article.article.body)"></div>
+    <div class="search-section">
+      <div class="wrapper">
+        <input ng-model="query" placeholder="Quick Search ..[tab].." class="text">
+      </div>
     </div>
+    <ul>
+      <li ng-repeat="article in articles | filter:query" ng-class-odd="'odd'" ng-class-even="'even'" prism>
+        <div class="wrapper">
+          <div class="articles" key-nav>
+          <h2>{{article.article.title}}</h2>
+          <div class="description" ng-bind-html="renderHtml(article.article.body)"></div>
+        </div>
+      </li>
+    </ul>
   </div>
 </div>
