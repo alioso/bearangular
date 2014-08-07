@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * @file
+ * Install file for Highlight JS library.
+ *
+ * @author Juned Kazi
+ */
+
+/**
+ * Implements hook_requirements().
+ */
+function highlight_js_requirements($phase) {
+  $requirements = array();
+
+  switch ($phase) {
+
+    case 'install':
+      // Check to make sure at least Libraries 2.x is installed.
+      if (!function_exists('libraries_detect')) {
+        $requirements['highlightjs'] = array(
+          'title' => t('Libraries'),
+          'value' => t('1.x'),
+          'description' => t('Highlight.js requires Libraries 7.x-2.0-alpha1 or higher.'),
+          'severity' => REQUIREMENT_ERROR,
+        );
+      }
+      break;
+
+    case 'runtime':
+      // Check to make sure the highlight.js library is available.
+      $library = libraries_detect('highlightjs');
+      $requirements['highlightjs'] = array(
+        'title' => t('Highlight.js'),
+        'value' => $library['installed'] ? t('Installed') : t('Not installed'),
+        'description' => isset($library['error message']) ? $library['error message'] : '',
+        'severity' => $library['installed'] ? REQUIREMENT_OK : REQUIREMENT_ERROR,
+      );
+      break;
+  }
+  return $requirements;
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function highlight_js_uninstall() {
+  variable_del('highlightjs_style');
+}

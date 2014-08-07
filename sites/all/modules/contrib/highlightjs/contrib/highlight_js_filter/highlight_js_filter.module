@@ -1,0 +1,128 @@
+<?php
+
+/**
+ * @file
+ * Provides the Highlight JS filter.
+ *
+ * @author Juned Kazi
+ */
+
+/**
+ * Implement hook_filter_info().
+ */
+function highlight_js_filter_filter_info() {
+  $filters['highlight_js'] = array(
+    'title' => t('Highlight JS Filter'),
+    'description' => t('Allows users to post code verbatim using &lt;code&gt; and &lt;?php ?&gt; tags.'),
+    'prepare callback' => '_highlight_js_filter_prepare',
+    'process callback' => '_highlight_js_filter_process',
+    'tips callback' => '_highlight_js_filter_tips',
+    'cache' => FALSE,
+  );
+  return $filters;
+}
+
+
+/**
+ * Tips callback for Highlight JS filter.
+ */
+function _highlight_js_filter_tips($format, $long = FALSE) {
+  if ($long) {
+    return t('To post pieces of code, surround them with &lt;code&gt;...&lt;/code&gt; tags.');
+  }
+  else {
+    return t('You may post code using &lt;code&gt;...&lt;/code&gt; (generic) tags.');
+  }
+}
+
+/**
+ * Prepare callback for Highlight JS filter.
+ */
+function _highlight_js_filter_prepare($text, $format) {
+  $text = preg_replace_callback('@<code>(.+?)</code>@s', '_highlight_js_filter_escape_code_tag_callback', $text);
+  $text = preg_replace_callback('@<code class="(.+?)">(.+?)</code>@s', '_highlight_js_filter_escape_code_tag_lang_callback', $text);
+  return $text;
+}
+
+/**
+ * Callback to escape content of <code> elements.
+ */
+function _highlight_js_filter_escape_code_tag_callback($matches) {
+  return highlight_js_filter_escape($matches[1], 'code');
+}
+
+/**
+ * Callback to escape content of <code lang="php"> elements.
+ */
+function _highlight_js_filter_escape_code_tag_lang_callback($matches) {
+  return highlight_js_filter_escape($matches[2], 'code', $matches[1]);
+}
+
+
+/**
+ * Escape code blocks during input filter 'prepare'.
+ *
+ * @param $text
+ *   The string to escape.
+ * @param $type
+ *   The type of code block, either 'code' or 'php'.
+ * @return
+ *   The escaped string.
+ */
+function highlight_js_filter_escape($text, $type = 'code', $lang = '') {
+  // Note, pay attention to odd preg_replace-with-/e behaviour on slashes
+  $text = check_plain(str_replace('\"', '"', $text));
+  // Protect newlines from line break converter
+  $text = str_replace(array("\r", "\n"), array('', '&#10;'), $text);
+  $lang = empty($lang) ? '' : ' class="' . $lang . '"';
+  // Add codefilter escape tags
+  $text = "[highlightjs_$type$lang]{$text}[/highlightjs_$type]";
+  return $text;
+}
+
+
+
+function _highlight_js_filter_process($text, $format) {
+  $text = preg_replace_callback('@\[highlightjs_code\](.+?)\[/highlightjs_code\]@s', '_highlight_js_filter_process_code_callback', $text);
+  $text = preg_replace_callback('@\[highlightjs_code class="(.+?)"\](.+?)\[/highlightjs_code\]@s', '_highlight_js_filter_process_code_lang_callback', $text);
+  return $text;
+}
+
+/**
+ * Callback to replace content of the <code> elements.
+ */
+function _highlight_js_filter_process_code_callback($matches) {
+  return highlight_js_filter_process_code($matches[1]);
+}
+
+/**
+ * Callback to replace content of the <code> elements.
+ */
+function _highlight_js_filter_process_code_lang_callback($matches) {
+  $lang = $matches[1];
+  $text = $matches[2];
+  return highlight_js_filter_process_code($text, $lang);
+}
+
+
+/**
+ * Processes chunks of escaped code into HTML.
+ */
+function highlight_js_filter_process_code($text, $lang = '') {
+  // Undo linebreak escaping
+  $text = str_replace('&#10;', "\n", $text);
+  // Inline or block level piece?
+  $multiline = strpos($text, "\n") !== FALSE;
+  // Note, pay attention to odd preg_replace-with-/e behaviour on slashes
+  $text = preg_replace("/^\n/", '', preg_replace('@</?(br|p)\s*/?>@', '', str_replace('\"', '"', $text)));
+  // Trim leading and trailing linebreaks
+  $text = trim($text, "\n");
+  $class = empty($lang) ? '' : ' class="' . $lang . '"';
+  $text = '<pre><code' . $class . '>' . highlight_js_filter_fix_spaces(str_replace(' ', '&nbsp;', $text)) . '</code></pre>';
+  return $text;
+}
+
+
+function highlight_js_filter_fix_spaces($text) {
+  return preg_replace('@&nbsp;(?!&nbsp;)@', ' ', $text);
+}

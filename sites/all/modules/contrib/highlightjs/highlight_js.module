@@ -1,0 +1,112 @@
+<?php
+
+/**
+ * @file
+ * Provides the Highlight JS library.
+ *
+ * @author Juned Kazi
+ */
+
+/**
+ * Implements hook_libraries_info().
+ */
+function highlight_js_libraries_info() {
+  $libraries['highlightjs'] = array(
+    'name' => 'highlightjs',
+    'vendor url' => 'http://softwaremaniacs.org/soft/highlight/en',
+    'download url' => 'http://softwaremaniacs.org/soft/highlight/en/download',
+    'version' => '7.2',
+    'files' => array(
+      'js' => array(
+        'highlight.pack.js',
+      ),
+      'css' => array(
+        'styles/default.css',
+      ),
+    ),
+  );
+  return $libraries;
+}
+
+/**
+ * Implementation of hook_menu().
+ */
+function highlight_js_menu() {
+  $items['admin/config/user-interface/highlightjs'] = array(
+    'title' => 'Highlight JS',
+    'description' => 'Configure settings for Highlight js styles.',
+    'access arguments' => array('administer highlight js'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('highlight_js_settings'),
+  );
+  return $items;
+}
+
+/**
+ * Implementation of hook_perm().
+ */
+function highlight_js_permission() {
+  return array(
+    'administer highlight js' => array(
+      'title' => t('Administer Highlight JS'),
+      'description' => t('Configure the default highlight js style.')
+    )
+  );
+}
+
+/**
+ * Settings form for module filter.
+ */
+function highlight_js_settings() {
+  $options = highlight_js_list_themes();
+  $form['highlightjs_style'] = array(
+    '#type' => 'select',
+    '#title' => t('Highlight JS default style'),
+    '#default_value' => variable_get('highlightjs_style', 'default'),
+    '#description' => t('Select the default code style format. Please refer to the !url page for a live demo of all the styles.',
+                        array('!url' => l('Demo', 'http://softwaremaniacs.org/media/soft/highlight/test.html'))),
+    '#options' => $options,
+  );
+  return system_settings_form($form);
+}
+
+/**
+ * List the available themes.
+ */
+function highlight_js_list_themes() {
+  static $themes;
+
+  if (isset($themes)) {
+    return $themes;
+  }
+  $themes = array();
+  if (module_exists('libraries')) {
+    $directory = libraries_get_path('highlightjs') . '/styles/';
+    if (!empty($directory)) {
+      $files = file_scan_directory($directory, '/.*\.css$/', array('key' => 'name'));
+      foreach ($files as $key => $fileinfo) {
+        $themes[drupal_strtolower($key)] = drupal_ucfirst($key);
+      }
+      natcasesort($themes);
+    }
+  }
+  return $themes;
+}
+
+/**
+ * Implements hook_init().
+ */
+function highlight_js_init() {
+  if (($library = libraries_load('highlightjs')) && !empty($library['loaded'])) {
+
+    // Load the highlight js to trigger the library function
+    drupal_add_js(drupal_get_path('module', 'highlight_js') . '/highlight_js.js');
+    // Loading it as CSS_THEME to override the default style css properties
+    drupal_add_css(drupal_get_path('module', 'highlight_js') . '/highlight_js.css', array('group' => CSS_THEME, 'type' => 'file'));
+
+    if (variable_get('highlightjs_style', 'default') != 'default') {
+      drupal_add_css($library['library path'] . '/styles/' . variable_get('highlightjs_style', 'default') . '.css', array('group' => CSS_THEME, 'type' => 'file'));
+    }
+  }
+}
+

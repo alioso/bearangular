@@ -8,8 +8,8 @@
       <li ng-repeat="article in articles | filter:query" ng-class-odd="'odd'" ng-class-even="'even'" prism>
         <div class="wrapper">
           <div class="articles" key-nav>
-          <h2>{{article.article.title}}</h2>
-          <div class="description" ng-bind-html="renderHtml(article.article.body)"></div>
+          <h2>{{article.title}}</h2>
+          <div class="description" ng-bind-html="renderHtml(article.body)"></div>
         </div>
       </li>
     </ul>

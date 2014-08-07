@@ -1,0 +1,14 @@
+pre {
+  line-height: 1;
+  padding: 5px;
+}
+
+pre code {
+  padding: 15px !important;
+}
+
+pre .comment {
+  margin-bottom: 0px;
+  display: inline;
+}
+
