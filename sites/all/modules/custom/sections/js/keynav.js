@@ -14,7 +14,7 @@
             liSelected = next.addClass('selected');
           }
           else{
-            liSelected = li.eq(0).addClass('selected');
+            liSelected = $('li.first').addClass('selected');
           }
         }
         else{
@@ -53,6 +53,19 @@
           selection.removeAllRanges();
           selection.addRange(range);
         }
+      }
+
+      if(e.which === 83){
+        setTimeout(function(){
+         $('#search').focus().tap();
+        },0);
+      }
+
+      if(e.which === 27){
+        setTimeout(function(){
+         $('#search').blur();
+         //li.removeClass('selected');
+        },0);
       }
 
       if(e.which === 67){
