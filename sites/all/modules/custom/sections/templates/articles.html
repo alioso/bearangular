@@ -15,7 +15,7 @@
     </div>
   </div>
   <ul class="ngdata">
-    <li ng-repeat="article in articles | filter:query orderBy:'title'" ng-class-odd="'odd'" ng-class-even="'even'" prism>
+    <li ng-repeat="article in articles | filter:query | orderBy:'title'" ng-class-odd="'odd'" ng-class-even="'even'" prism>
       <div class="wrapper">
         <div class="articles" key-nav>
           <h2>{{article.title}}</h2>
