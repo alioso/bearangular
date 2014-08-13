@@ -5,8 +5,8 @@
     </div>
   </div>
   <ul>
-    <li data-ng-repeat="section in sections | filter:query | orderBy:'name'" ng-class-odd="'odd'" ng-class-even="'even'" ng-class="{'first':$first, 'last':$last}">
-      <a href="#/section/{{section.tid}}" class="section-link" key-nav>
+    <li data-ng-repeat="section in sections | filter:query | orderBy:'name'" ng-class-odd="'odd'" ng-class-even="'even'" ng-class="{'first':$first, 'last':$last}" key-nav>
+      <a href="#/section/{{section.tid}}" class="section-link" >
         <div class="wrapper">
           <h2>{{section.name}}</h2>
           <div class="description">{{section.description}}</div>

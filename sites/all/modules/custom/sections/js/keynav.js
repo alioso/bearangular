@@ -28,19 +28,12 @@
         if(liSelected){
           liSelected.removeClass('selected');
           next = liSelected.prev();
-          prev = liSelected.next();
           if(next.length > 0){
             liSelected = next.addClass('selected');
           }
-          else if(prev.length > 0){
-            liSelected = prev.removeClass('selected');
-          }
           else{
-            liSelected = li.last().removeClass('selected');
+            liSelected = $('li.first').addClass('selected');
           }
-        }
-        else{
-          liSelected = li.last().addClass('selected');
         }
         e.preventDefault();
         $('.section li a').css('pointer-events', 'none');
