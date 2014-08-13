@@ -1,13 +1,23 @@
 <div class="article">
-    <div class="search-section">
-      <div class="wrapper">
-        <input ng-model="query" placeholder="Quick Search ..[s].." class="text" id="search">
-      </div>
+  <div class="wrapper">
+    <div class="nomen">
+      <ul>
+        <li><div class="content"><div><span><i>&#8595;</i> down</span></div></li>
+        <li><div class="content"><div><span><i>&#8593;</i> up</span></div></div></li>
+        <li><div class="content"><div><span><i>&#8592;</i> back</span></div></div></li>
+        <li><div class="content"><div><span><i>c</i> code</span></div></div></li>
+      </ul>
     </div>
-    <ul>
-      <li ng-repeat="article in articles | filter:query orderBy:'title'" ng-class-odd="'odd'" ng-class-even="'even'" prism>
-        <div class="wrapper">
-          <div class="articles" key-nav>
+  </div>
+  <div class="search-section">
+    <div class="wrapper">
+      <input ng-model="query" placeholder="Quick Search" class="text" id="search">
+    </div>
+  </div>
+  <ul class="ngdata">
+    <li ng-repeat="article in articles | filter:query orderBy:'title'" ng-class-odd="'odd'" ng-class-even="'even'" prism>
+      <div class="wrapper">
+        <div class="articles" key-nav>
           <h2>{{article.title}}</h2>
           <div class="description" ng-bind-html="renderHtml(article.body)"></div>
         </div>

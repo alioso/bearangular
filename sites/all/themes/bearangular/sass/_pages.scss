@@ -60,6 +60,7 @@ header {
           float: left;
           width: 100%;
           clear: both;
+          position: relative;
           ul {
             padding: 0;
             margin: 0;
@@ -112,6 +113,56 @@ header {
                 }
                 .description {
                   color: #333;
+                }
+              }
+            }
+          }
+          .nomen {
+            position: absolute;
+            top: -67px;
+            right: 0;
+            ul {
+              li {
+                color: #999;
+                float: left;
+                display: inline;
+                clear: none;
+                width: 50px;
+                height: 50px;
+                margin: 0 10px 0 0;
+                position: relative;
+                color: #999;
+                &:before {
+                  content: "";
+                  display: block;
+                  padding-top: 100%;
+                }
+                .content {
+                  position:  absolute;
+                  top: 0;
+                  left: 0;
+                  bottom: 0;
+                  right: 0;
+                  div {
+                    display: table;
+                    width: 100%;
+                    height: 100%;
+                    span {
+                      display: table-cell;
+                      text-align: center;
+                      vertical-align: middle;
+                      i {
+                        font-style: normal;
+                        clear: both;
+                        width: 38px;
+                        display: block;
+                        background: #424242;
+                        color: #CCC;
+                        margin: 0 auto;
+                        padding: 5px 0;
+                      }
+                    }
+                  }
                 }
               }
             }

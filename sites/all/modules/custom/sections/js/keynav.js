@@ -2,7 +2,7 @@
 
   $.fn.keynav = function() {
 
-    var li = $('.section li, .article li');
+    var li = $('.ngdata li');
     var liSelected;
 
     $(window).keydown(function(e){
