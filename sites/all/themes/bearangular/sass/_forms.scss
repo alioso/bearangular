@@ -188,4 +188,10 @@ a.button {
     background: #ddd;
   }
 }
+::selection {
+  background: #999;
+}
+::-moz-selection {
+  background: #999;
+}
 
