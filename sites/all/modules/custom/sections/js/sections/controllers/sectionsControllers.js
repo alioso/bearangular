@@ -3,16 +3,6 @@
 var sectionsControllers = angular.module('sectionsControllers', []);
 
 sectionsControllers
-.controller('mainCtrl', ['$scope', '$location',
-  function($scope, $location) {
-    $scope.awesomeThings =[
-      'AngularJS'
-    ];
-    $scope.isActive = function (viewLocation) {
-     var active = (viewLocation === $location.path());
-     return active;
-    };
-}])
 .controller('sectionsCtrl', ['$scope', '$http', '$location',
   function($scope, $http, $location) {
   $http.get('/json/sections').success(function(result) {
