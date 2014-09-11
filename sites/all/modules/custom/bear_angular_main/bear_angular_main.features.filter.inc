@@ -14,7 +14,7 @@ function bear_angular_main_filter_default_formats() {
   $formats['bear_angular'] = array(
     'format' => 'bear_angular',
     'name' => 'Bear Angular',
-    'cache' => 0,
+    'cache' => 1,
     'status' => 1,
     'weight' => 0,
     'filters' => array(
@@ -27,11 +27,6 @@ function bear_angular_main_filter_default_formats() {
       ),
       'filter_autop' => array(
         'weight' => -45,
-        'status' => 1,
-        'settings' => array(),
-      ),
-      'highlight_js' => array(
-        'weight' => 0,
         'status' => 1,
         'settings' => array(),
       ),
